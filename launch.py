@@ -5,7 +5,7 @@ import tornado.httpserver
 import tornado.ioloop
 import routers
 from controller import manage
-from config import initialize_db
+#from config import initialize_db
 
 # __author__ = 'hfli'
 
@@ -21,7 +21,6 @@ class Application(tornado.web.Application):
 
 def main():
 	initialize_db()
-	print("----------")
 	tornado.httpserver.HTTPServer(Application()).listen(8899)
 	print("Web is running %d" %8899)
 	tornado.ioloop.IOLoop.instance().start()

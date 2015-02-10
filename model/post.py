@@ -5,8 +5,8 @@ import sqlalchemy
 from config import mBase
 
 class Post(mBase):
-
     __tablename__ = 'Post'
+    __table_args__ = {'extend_existing':True}
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key = True, autoincrement = True)
     title = sqlalchemy.Column(sqlalchemy.String(64))
@@ -16,7 +16,6 @@ class Post(mBase):
 
     def __init__(self, title=title, content=content,
                  created_date = None, update_date = None):
-        print("Hello world")
         self.title=title
         self.content = content
 
