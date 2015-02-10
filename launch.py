@@ -5,6 +5,9 @@ import tornado.httpserver
 import tornado.ioloop
 import routers
 from controller import manage
+import database
+
+from model import *
 #from config import initialize_db
 
 # __author__ = 'hfli'
@@ -20,10 +23,12 @@ class Application(tornado.web.Application):
         tornado.web.Application.__init__(self, handlers, debug=True)
 
 def main():
-	initialize_db()
-	tornado.httpserver.HTTPServer(Application()).listen(8899)
-	print("Web is running %d" %8899)
-	tornado.ioloop.IOLoop.instance().start()
+    database.initialize_db()
+#    print(database.db,__file__)
+#    db.generate_mapping(check_tables=True,create_tables=True)
+    tornado.httpserver.HTTPServer(Application()).listen(8899)
+    print("Web is running %d" %8899)
+    tornado.ioloop.IOLoop.instance().start()
 
 if __name__ == '__main__':
 	main()
