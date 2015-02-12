@@ -1,13 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>BBS system</title>
-</head>
-<body>
-{{ for post in posts }}
+{% extends "layout.html" %}
+{% block content %}
+<div class="bs-example bs-post">
+<form id="new_post" action="/add_post" method="post" >
+    <!--<div>作者：<input id="submit_author" style="width=50%"/></div>-->
+    <div>标题：<input name="submit_title" style="width:80%"/></div>
+    <div style="margin-top:10px">内容：<textarea name="submit_post_content" id="submit_content"  rows="8" style="width:90%;height: 96px;"></textarea></div>
+    <div><input id="submit_button" type="submit" value="回 复" ></div>
+</form>
+</div>
+<div class="panel panel-default">
+  <div class="panel-heading">BBS System</div>
+  <table class="table table-hover table-bordered table-condensed">
+<thead><tr><th>#</th><th>Title</th><th>Author</th><th>Last Modified Date</th></tr></thead>
+{% for n,post in enumerate(posts) %}
+  <tr>
+  <td style="width:2%">{{ n+1 }}</td><td> <a href="/post_content?id={{post.id}}">{{ post.title }}</a></td><td >{{ post.user.alias }}</td><td style="width:15%">{{ format_date(post.updated_date) }}</td>
+  </tr>
+{% end %}
+  </table>
+  <div class="panel-footer"> Copyright 2015</div>
+</div>
 
-
-{{ end }}
-</body>
-</html>
+{% end %}

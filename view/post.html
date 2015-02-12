@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="panel panel-default">
+<div class="panel-heading">{{ post.title }}</div>
+<div class="panel-body">{{ post.content }}</div>
+<table class="table">
+<thead><tr><th colspan="2">跟帖信息</th></tr></thead>
+{% for subpost in subposts %}
+<tr>
+<td>{{subpost.title}}</td><td>{{subpost.user.alias}}@{{format_date(subpost.created_date)}}</td>
+</tr>
+<tr>
+<td colspan="2">{{subpost.content}}</td>
+</tr>
+{% end %}
+</table>
+<div class="bs-example bs-post">
+	<form id="new_post" action="/add_sub_post" method="post" >
+	    <!--<div>作者：<input id="submit_author" style="width=50%"/></div>-->
+	    <div style="display:none"><input name="post_id" value="{{post.id}}"></div>
+	    <div>标题：<input name="submit_title" style="width:80%"/></div>
+	    <div style="margin-top:10px">内容：<textarea name="submit_post_content" id="submit_content"  rows="8" style="width:90%;height: 96px;"></textarea></div>
+	    <div><input id="submit_button" type="submit" value="回 复" ></div>
+	</form>
+</div>
+<div class="panel-footer"> Copyright 2015</div>
+</div>
+{% end %}

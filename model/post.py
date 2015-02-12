@@ -1,16 +1,24 @@
+# coding: utf-8
 __author__ = 'hfli'
 
 import time
-import sqlalchemy
-import database
+#import sqlalchemy
+from database import *
 from pony.orm import *
+from .user import *
 #from database import mBase
 
-class Post(database.db.Entity):
+class Post(db.Entity):
+# Set Primary Key
+    id=PrimaryKey(int, auto=True)
+
     title= Required(str)
+    user = Required(User)
     content=Required(str)
-    created_dat=Required(int,default=int(time.time()))
-    update_date=Required(int,default=int(time.time()))
+    created_date=Required(int,default=int(time.time()))
+    updated_date=Required(int,default=int(time.time()))
+ #   user = Required(User)
+    subpost = Set("SubPost")
     # __tablename__ = 'Post'
     # __table_args__ = {'extend_existing':True}
     #

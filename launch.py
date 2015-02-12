@@ -6,11 +6,14 @@ import tornado.ioloop
 import routers
 from controller import manage
 import database
+import time
 
 from model import *
+import logging
 #from config import initialize_db
 
 # __author__ = 'hfli'
+
 
 class Application(tornado.web.Application):
     def __init__(self):
@@ -20,10 +23,11 @@ class Application(tornado.web.Application):
             static_path = os.path.join(os.path.dirname(__file__),"static"),
             debug=True,
         )
-        tornado.web.Application.__init__(self, handlers, debug=True)
+        tornado.web.Application.__init__(self, handlers, **settings)
 
 def main():
     database.initialize_db()
+    logging.basicConfig(level=logging.INFO)
 #    print(database.db,__file__)
 #    db.generate_mapping(check_tables=True,create_tables=True)
     tornado.httpserver.HTTPServer(Application()).listen(8899)
