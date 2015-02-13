@@ -108,8 +108,9 @@ class AddSubPostHandler(BaseHandler):
         self.redirect("/post_content?id=%s"% (post_id))
 #        subposts = select (p for p in SubPost if p.post==post)
 class LoginHandler(BaseHandler):
+    loginerror = None
     def get(self):
-	self.render("login.html")
+	self.render("login.html",error=self.loginerror)
     @db_session
     def post(self):
         alias=self.get_argument("nickname")
@@ -121,7 +122,8 @@ class LoginHandler(BaseHandler):
             self.set_secure_cookie("user",alias)
             self.redirect("/")
         else:
-            self.redirect("/login")
+            self.loginerror="用户名，密码错误"
+            self.render("login.html",error=self.loginerror)
 
 class LogoutHandler(BaseHandler):
     def get(self):

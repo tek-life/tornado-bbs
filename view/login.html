@@ -13,6 +13,13 @@ No Account? Please Register First <a href="/register">Register</a>
     <label for="InputPassword">Password</label>
     <input type="password" name="password" class="form-control" id="InputPassword" placeholder="Password">
   </div>
+  {% if error != None %}
+  <div style="color:red">
+    <label>
+     {{error}}
+    </label>
+  </div>
+  {% end %}
   <div class="checkbox">
     <label>
       <input type="checkbox"> Check me out
