@@ -79,6 +79,8 @@ class PostHandler(BaseHandler):
 
     @db_session
     def post(self, *args, **kwargs):
+        if( not self.is_login()):
+            self.redirect("/login")
         title=self.get_argument("submit_title")
         content=self.get_argument("submit_post_content")
         author=User.get(alias=self.current_user)
@@ -89,8 +91,9 @@ class PostHandler(BaseHandler):
 
 class AddSubPostHandler(BaseHandler):
     @db_session
-    @authenticated
     def post(self):
+        if( not self.is_login()):
+            self.redirect("/login")
         post_id = self.get_argument("post_id")
         title=self.get_argument("submit_title")
         content=self.get_argument("submit_post_content")
