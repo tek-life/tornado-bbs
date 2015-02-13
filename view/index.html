@@ -14,7 +14,11 @@
 <thead><tr><th>#</th><th>Title</th><th>Author</th><th>Last Modified Date</th></tr></thead>
 {% for n,post in enumerate(posts) %}
   <tr>
-  <td style="width:2%">{{ n+1 }}</td><td> <a href="/post_content?id={{post.id}}">{{ post.title }}</a></td><td >{{ post.user.alias }}</td><td style="width:15%">{{ format_date(post.updated_date) }}</td>
+  <td style="width:2%">{{ n+1 }}</td><td> <a href="/post_content?id={{post.id}}">{{ post.title }}</a></td><td >{{ post.user.alias }}
+  {% if current_user == post.user.alias %}
+	<a href="/del?id={{post.id}}&&kind=post">Del</a>
+  {% end %}
+  </td><td style="width:15%">{{ format_date(post.updated_date) }}</td>
   </tr>
 {% end %}
   </table>

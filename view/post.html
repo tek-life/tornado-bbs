@@ -9,7 +9,11 @@
 <thead><tr><th colspan="2">跟帖信息</th></tr></thead>
 {% for subpost in subposts %}
 <tr>
-<td>{{subpost.title}}</td><td>{{subpost.user.alias}}@{{format_date(subpost.created_date)}}</td>
+<td>{{subpost.title}} 
+{% if current_user == subpost.user.alias %}
+<a href="/del?id={{subpost.id}}&&kind=subpost">Del</a>
+{% end %}
+</td><td>{{subpost.user.alias}}@{{format_date(subpost.created_date)}}</td>
 </tr>
 <tr>
 <td colspan="2">{{subpost.content}}</td>

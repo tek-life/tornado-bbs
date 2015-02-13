@@ -7,6 +7,15 @@
     <title>BBS system</title>
 </head>
 <body style="margin-top:10px">
+<ul class="nav nav-pills nav-justifed">
+  <li role="presentation"><a href="/">Index</a></li>
+  {% if current_user != None %}
+  <li role="presentation"><a href="/#">{{current_user}}</a></li>
+  {% else %}
+  <li role="presentation"><a href="/login">Login</a></li>
+  {% end %}
+  <li role="presentation"><a href="/logout">Logout</a></li>
+</ul>
 <div class="container">
 {% block content %}
 {% end %}

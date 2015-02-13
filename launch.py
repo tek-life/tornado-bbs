@@ -21,6 +21,8 @@ class Application(tornado.web.Application):
         settings = dict(
             template_path = os.path.join(os.path.dirname(__file__),"view"),
             static_path = os.path.join(os.path.dirname(__file__),"static"),
+	    cookie_secret="abc",
+	    login_url="/login",
             debug=True,
         )
         tornado.web.Application.__init__(self, handlers, **settings)
