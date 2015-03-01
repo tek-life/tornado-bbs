@@ -5,7 +5,7 @@ from tornado.web import *
 from model import *
 import time
 import datetime
-import random,string
+import random,string,shutil
 
 # __author__ = 'hfli'
 
@@ -65,6 +65,9 @@ class DelHandler(BaseHandler):
         elif kind == "post":
             post=Post.get(id=postid)
             if(post!=None):
+		path="static/"+str(post.id)
+		if os.path.exists(path):
+		    shutil.rmtree(path)
                 post.delete()
 
         self.redirect(self.request.headers['referer'])
