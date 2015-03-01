@@ -5,6 +5,7 @@ from tornado.web import *
 from model import *
 import time
 import datetime
+import random,string
 
 # __author__ = 'hfli'
 
@@ -95,10 +96,13 @@ class PostHandler(BaseHandler):
         commit()
         if self.request.files:
             uploadfile=self.request.files['inputfile'][0]
+	    print(uploadfile)
             filename='static/'+str(post.id)
             if not os.path.exists(filename):
 	            os.mkdir(filename)
-            filename +='/'+uploadfile['filename']
+	    fname = ''.join(random.choice(string.ascii_lowercase + string.digits) for x in range(60))
+	    extension=os.path.splitext(uploadfile['filename'])[1]
+            filename +='/'+fname+extension
             uploadfile_handle=open(filename,'wb')
             uploadfile_handle.write(uploadfile['body'])
         self.redirect("/")
