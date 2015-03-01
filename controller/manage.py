@@ -74,8 +74,15 @@ class PostHandler(BaseHandler):
     def get(self):
         post_id = self.get_argument("id")
         post = get(p for p in Post if p.id == post_id)
+        if os.path.exists("static/"+str(post.id)):
+	        files=os.listdir("static/"+str(post.id))
+	        for index in range(len(files)):
+		        print("=============")
+		        files[index]="static/"+str(post.id)+"/"+files[index]
+	else :
+	        files=[]
         subpost = select(p for p in SubPost if p.post == post).order_by(SubPost.created_date.desc())
-        self.render("post.html",post=post,subposts=subpost,format_date=format_date)
+        self.render("post.html",post=post,subposts=subpost,format_date=format_date,files=files)
 
     @db_session
     def post(self, *args, **kwargs):

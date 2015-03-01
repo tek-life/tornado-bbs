@@ -5,6 +5,13 @@
 <div class="panel panel-default">
 <div class="panel-heading">{{ post.title }}</div>
 <div class="panel-body">{{ post.content }}</div>
+    {% if files %}
+    {% for file in files%}
+    <div class="panel-footer">
+        <a href="{{file}}">{{file.split("/")[-1]}}</a>
+    </div>
+    {% end %}
+    {% end %}
 <table class="table">
 <thead><tr><th colspan="2">跟帖信息</th></tr></thead>
 {% for subpost in subposts %}
