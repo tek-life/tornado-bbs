@@ -86,6 +86,15 @@ class PostHandler(BaseHandler):
         author=User.get(alias=self.current_user)
         created_date=int(time.time())
         post=Post(title=title,content=content,user=author,created_date=created_date,updated_date=created_date)
+        commit()
+        if self.request.files:
+            uploadfile=self.request.files['inputfile'][0]
+            filename='static/'+str(post.id)
+            if not os.path.exists(filename):
+	            os.mkdir(filename)
+            filename +='/'+uploadfile['filename']
+            uploadfile_handle=open(filename,'wb')
+            uploadfile_handle.write(uploadfile['body'])
         self.redirect("/")
 
 
