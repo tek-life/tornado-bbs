@@ -77,7 +77,6 @@ class PostHandler(BaseHandler):
         if os.path.exists("static/"+str(post.id)):
 	        files=os.listdir("static/"+str(post.id))
 	        for index in range(len(files)):
-		        print("=============")
 		        files[index]="static/"+str(post.id)+"/"+files[index]
 	else :
 	        files=[]
