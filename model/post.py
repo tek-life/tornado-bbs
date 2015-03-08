@@ -14,7 +14,7 @@ class Post(db.Entity):
 
     title= Required(str)
     user = Required(User)
-    content=Required(str)
+    content=Required(LongUnicode)
     created_date=Required(int,default=int(time.time()))
     updated_date=Required(int,default=int(time.time()))
  #   user = Required(User)

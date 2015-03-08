@@ -4,7 +4,7 @@
 
 <div class="panel panel-default">
 <div class="panel-heading">{{ post.title }}</div>
-<div class="panel-body">{{ post.content }}</div>
+<div class="panel-body">{% raw post.content %}</div>
     {% if files %}
     {% for file in files%}
     <div class="panel-footer">
